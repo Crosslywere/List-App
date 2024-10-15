@@ -62,7 +62,11 @@ public class ListView extends VerticalLayout {
 				var li = new ListItem();
 				li.setTimeCreated(LocalDateTime.now());
 				listItemBinder.writeBean(li);
-				listItemRepository.save(li);
+				if (!li.getTitle().isBlank()) {
+					listItemRepository.save(li);
+				} else {
+					Notification.show("Title cannot be blank", 5000, Notification.Position.TOP_START);
+				}
 				listItemBinder.setBean(new ListItem());
 				renderList();
 			} catch (ValidationException e) {
@@ -93,7 +97,7 @@ public class ListView extends VerticalLayout {
 		listItemGrid.addColumn(ListItem::getDescription)
 				.setAutoWidth(true)
 				.setHeader("Description");
-		listItemGrid.addColumn(new LocalDateTimeRenderer<>(ListItem::getTimeCreated, "hh:mm a - dd/MMM/yyyy"))
+		listItemGrid.addColumn(new LocalDateTimeRenderer<>(ListItem::getTimeCreated, "h:mm a - dd/MMM/yyyy"))
 				.setHeader("Date Created")
 				.setSortable(true)
 				.setComparator(ListItem::getTimeCreated);
