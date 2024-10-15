@@ -152,7 +152,7 @@ public class ListView extends VerticalLayout {
 	}
 
 	private void renderList() {
-		var data = listItemRepository.findAll(Sort.by("timeCreated"));
+		var data = listItemRepository.findAll(Sort.by(Sort.Direction.DESC, "timeCreated"));
 		listItemGrid.setItems(data);
 	}
 
