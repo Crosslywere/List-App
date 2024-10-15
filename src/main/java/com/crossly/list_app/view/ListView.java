@@ -58,7 +58,6 @@ public class ListView extends VerticalLayout {
 		listItemBinder.bind(descArea, ListItem::getDescription, ListItem::setDescription);
 		// Setting up the submit button
 		var submitButton = new Button("Create", event -> {
-			// TODO Save list item
 			try {
 				var li = new ListItem();
 				li.setTimeCreated(LocalDateTime.now());
@@ -129,7 +128,6 @@ public class ListView extends VerticalLayout {
 
 	private Section listItemRenderer(ListItem li) {
 		var section = new Section();
-		// TODO Implement rendering
 		var title = li.getTitle();
 		var checkBox = new Checkbox(li.getCompleted());
 		checkBox.addValueChangeListener(
